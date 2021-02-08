@@ -26,7 +26,7 @@ from userbot.events import register
 
 # ========================= CONSTANTS ============================
 UNAPPROVED_MSG = (
-    "`HeY! Please don't spam. Wait for my master's approval 🙃\nMessage remaining:1 \n\n`")
+    "`Auto Genereated Message by My Bot: Heyy! Don't Personal Message me Without Permission. Wait for my Maintainers's approval. Just be Patient. Thanks 🙃\nMessage remaining:1 \n\n`")
 # =================================================================
 
 NO_PM_LOG_USERS = []
@@ -78,7 +78,7 @@ async def permitpm(event):
                 if COUNT_PM[event.chat_id] > 2:
                     await event.respond(
                         "`You were spamming my pm dude.`\n"
-                        "`You have been BLOCKED and reported as SPAM now. JUST FUCK OFF 🖕.`"
+                        "`You have been BLOCKED and reported as SPAM now, Sorry but it's your fault, Told you not to Spam!.`"
                     )
 
                     try:
@@ -193,7 +193,7 @@ async def approvepm(apprvpm):
         await apprvpm.edit("`User may already be approved.`")
         return
 
-    await apprvpm.edit(f"[{name0}](tg://user?id={uid}) `approved to PM!`")
+    await apprvpm.edit(f"[{name0}](tg://user?id={uid}) `is now allowed to personal message me! Congrats, you're approved!`")
 
     async for message in apprvpm.client.iter_messages(apprvpm.chat_id,
                                                       from_user='me',
@@ -227,13 +227,13 @@ async def disapprovepm(disapprvpm):
         name0 = str(aname.first_name)
 
     await disapprvpm.edit(
-        f"[{name0}](tg://user?id={disapprvpm.chat_id}) `Disaproved to PM!`")
+        f"[{name0}](tg://user?id={disapprvpm.chat_id}) `isn't allowed to personal message me! If He Tries again, he'll be blocked and marked as spam`")
 
     if BOTLOG:
         await disapprvpm.client.send_message(
             BOTLOG_CHATID,
             f"[{name0}](tg://user?id={disapprvpm.chat_id})"
-            " was disapproved to PM you.",
+            " Has Been Disapproved.",
         )
 
 
@@ -246,12 +246,12 @@ async def blockpm(block):
         aname = replied_user.id
         name0 = str(replied_user.first_name)
         await block.client(BlockRequest(replied_user.id))
-        await block.edit("`You've been blocked!`")
+        await block.edit("`I have blocked you now! I'm sorry but I'm not intrested, I don't want any shit now!`")
         uid = replied_user.id
     else:
         await block.client(BlockRequest(block.chat_id))
         aname = await block.client.get_entity(block.chat_id)
-        await block.edit("`You've been blocked 😡!`")
+        await block.edit("`I have blocked you now! I'm sorry but I'm not intrested, I don't want any shit now 😡`")
         name0 = str(aname.first_name)
         uid = block.chat_id
 
@@ -276,7 +276,7 @@ async def unblockpm(unblock):
         replied_user = await unblock.client.get_entity(reply.from_id)
         name0 = str(replied_user.first_name)
         await unblock.client(UnblockRequest(replied_user.id))
-        await unblock.edit("`You have been unblocked 😌.`")
+        await unblock.edit("`You have been unblocked, don't do what you did last time tho!`")
 
     if BOTLOG:
         await unblock.client.send_message(
